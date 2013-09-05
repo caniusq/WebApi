@@ -1,0 +1,91 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Cus.WebApi.Test</name>
+    </assembly>
+    <members>
+        <member name="T:Cus.WebApi.Test.TestData">
+            <summary>
+            测试数据的说明
+            </summary>
+        </member>
+        <member name="P:Cus.WebApi.Test.TestData.test1">
+            <summary>
+            test1的说明
+            </summary>
+        </member>
+        <member name="P:Cus.WebApi.Test.TestData.test2">
+            <summary>
+            test2的说明
+            </summary>
+        </member>
+        <member name="P:Cus.WebApi.Test.TestData.test3">
+            <summary>
+            test3的说明
+            </summary>
+        </member>
+        <member name="P:Cus.WebApi.Test.TestData.test4">
+            <summary>
+            test4的说明
+            </summary>
+        </member>
+        <member name="P:Cus.WebApi.Test.TestData.test5">
+            <summary>
+            test5的说明
+            </summary>
+        </member>
+        <member name="P:Cus.WebApi.Test.TestData.test6">
+            <summary>
+            test6的说明
+            </summary>
+        </member>
+        <member name="T:Cus.WebApi.Test.TestSubData">
+            <summary>
+            TestSubData的说明
+            </summary>
+        </member>
+        <member name="P:Cus.WebApi.Test.TestSubData.sub1">
+            <summary>
+            sub1的说明
+            </summary>
+        </member>
+        <member name="P:Cus.WebApi.Test.TestSubData.sub2">
+            <summary>
+            sub2的说明
+            </summary>
+        </member>
+        <member name="P:Cus.WebApi.Test.TestSubData.sub3">
+            <summary>
+            sub3的说明
+            </summary>
+        </member>
+        <member name="T:Cus.WebApi.Test.test">
+            <summary>
+            test 的摘要说明
+            </summary>
+        </member>
+        <member name="M:Cus.WebApi.Test.test.SignIn(System.String,System.Collections.Generic.Dictionary{System.String,System.String},System.Int32,System.Nullable{System.DateTime})">
+            <summary>
+            method1 的摘要说明
+            </summary>
+            <param name="p1">p1 111的摘要说明</param>
+            <param name="p2">p2 的摘要说明</param>
+            <param name="p3">p3 的摘要说明</param>
+            <param name="p4">p4 的摘要说明</param>
+            <returns>method1测试返回数据</returns>
+        </member>
+        <member name="M:Cus.WebApi.Test.test.SignIn2(System.Int32)">
+            <summary>
+            method2 的摘要说明
+            </summary>
+            <param name="p1">p1 的摘要说明</param>
+            <returns>method2测试返回数据</returns>
+        </member>
+        <member name="M:Cus.WebApi.Test.test.method3(System.Collections.Generic.IDictionary{System.String,System.String})">
+            <summary>
+            method3 的摘要说明
+            </summary>
+            <param name="p1">p1 的摘要说明</param>
+        </member>
+    </members>
+</doc>

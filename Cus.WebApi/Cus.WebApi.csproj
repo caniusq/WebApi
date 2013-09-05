@@ -1,0 +1,115 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{C0664DB8-E5F2-418C-95CD-89A76B60B9AC}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Cus.WebApi</RootNamespace>
+    <AssemblyName>Cus.WebApi</AssemblyName>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <DocumentationFile>Resource\Cus.WebApi.XML</DocumentationFile>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <DocumentationFile>Cus.WebApi.XML</DocumentationFile>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Newtonsoft.Json, Version=4.5.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\RefDll\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="ApiAuthAttribute.cs" />
+    <Compile Include="Configuration\ApiConfigurationSection.cs" />
+    <Compile Include="Configuration\AutheticationType.cs" />
+    <Compile Include="Configuration\AutheticationTypeElementCollection.cs" />
+    <Compile Include="Configuration\ConfigManager.cs" />
+    <Compile Include="Configuration\TypeConverter.cs" />
+    <Compile Include="Descriptor\TypeDefinitionContainer.cs" />
+    <Compile Include="IAuthetication.cs" />
+    <Compile Include="DefaultAutheticationImpl.cs" />
+    <Compile Include="UnhandledApiExceptionEventArgs.cs" />
+    <Compile Include="ApiException.cs" />
+    <Compile Include="Descriptor\ApiDescriptor.cs" />
+    <Compile Include="ApiHandler.cs" />
+    <Compile Include="ApiCodeAttribute.cs" />
+    <Compile Include="Descriptor\TypeDefinition.cs" />
+    <Compile Include="Descriptor\Descriptor.cs" />
+    <Compile Include="ApiManager.cs" />
+    <Compile Include="Descriptor\MethodDescriptor.cs" />
+    <Compile Include="Descriptor\ParamDescriptor.cs" />
+    <Compile Include="Descriptor\TypeDescriptor.cs" />
+    <Compile Include="Descriptor\PropertyDescriptor.cs" />
+    <Compile Include="Documentation\DocumentationAttribute.cs" />
+    <Compile Include="Documentation\DocumentApi.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ResManager.cs" />
+    <Compile Include="Response.cs" />
+    <Compile Include="Documentation\XmlDocumentationProvider.cs" />
+    <Compile Include="ApiIgnoreAttribute.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resource\documentation.html" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resource\documentation.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resource\jquery-1.10.2.min.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resource\Cus.WebApi.XML" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resource\lock.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resource\loading.gif" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resource\documentation.css" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resource\user.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resource\list.png" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
