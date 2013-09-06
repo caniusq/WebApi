@@ -19,14 +19,14 @@
     var method_div_top = $("<div/>").attr("id", "method_div_top");
     main_method.append(method_div_top);
 
-    var list_button = $("<img/>").attr("src", "?res=list.png").attr("id", "list_button");
+    var list_button = $("<img/>").attr("src", "?res=list.png").attr("id", "list_button").attr("title","收起").tipsy({ fade: true, gravity: 'n' });
     main_title.append(list_button);
 
     var user_div = $("<div/>").attr("id", "user_div");
     main_title.append(user_div);
 
     var user_label = $("<label/>");
-    var user_button = $("<img/>").attr("src", "?res=user.png").attr("id", "user_button");
+    var user_button = $("<img/>").attr("src", "?res=user.png").attr("id", "user_button").attr("title", "当前用户").tipsy({ fade: true, gravity: 'n' })
     user_div.append(user_button).append(user_label).hide();
 
     //var user_label = $("<label/>");
@@ -60,11 +60,13 @@
     list_button.click(function () {
         if ($(main_directory).is(":animated") || $(main_method).is(":animated")) return;
         if (main_directory.is(":visible")) {
+            list_button.attr("title", "展开").tipsy("show");
             main_directory.fadeOut("fast", function () {
                 main_method.animate({ width: "100%" }, "fast");
             });
         }
         else {
+            list_button.attr("title", "收起").tipsy("show");
             main_method.animate({ width: "75%" }, "fast", function () {
                 main_directory.fadeIn("fast", function () {
                 });
@@ -88,12 +90,12 @@
 
             main_method.append(methodDiv);
 
-            var nav = $("<div/>").text(method.Name).attr("title", method.Documentation).click(function () {
+            var nav = $("<div/>").text(method.Name).click(function () {
                 var dy = main_method.find("#mid_" + method.Name).offset().top - method_div_top.offset().top;
                 main_method.animate({ scrollTop: dy }, 120);
             });
 
-            var li = $("<li/>").append(nav);
+            var li = $("<li/>").append(nav).attr("title", method.Documentation).tipsy({ fade: true, gravity: 'n' });
             ul.append(li);
 
             ++index;
@@ -103,17 +105,22 @@
                 loading.fadeOut("fast");
                 root.append(div);
                 refreshUser();
-                var url = "?res=lock.png";
-                $.ajax({
-                    url: url,
-                    type: "GET",
-                    cache: true,
-                    processData: false,
-                }).always(function () {
-                    main_method.find(".lock").each(function () {
-                        $(this).attr("src", url);
+                if (ZeroClipboard.detectFlashSupport()) {
+                    var copy_buttons = main_method.find(".copy_button")
+                    var clip = new ZeroClipboard(copy_buttons);
+                    clip.on("load", function (t) {
+                        return $(t.htmlBridge).tipsy();
                     });
-                });
+                    clip.on("complete", function (t) {
+                        var e;
+                        return e = $(t.htmlBridge),
+                        e.prop("title", "复制成功！"),
+                        e.tipsy("show");
+                    });
+                }
+                else {
+                    main_method.find(".copy_button").hide(); 
+                }
             }
         });
     }
@@ -150,8 +157,8 @@ function genMethod(div, method, index) {
 
     var form = $("<form target='_blank' method='POST'/>").attr("action", url).data("origin_url", url);
     if (method.NeedAuth) {
-        var img = $("<img class='lock'/>").attr("title", "此接口需要验证");
-        form.append(img);
+        var lock = $("<span class='lock'/>").attr("title", "此接口需要验证").tipsy({ fade: true, gravity: 'n' });
+        form.append(lock);
     }
 
     var postButton = $("<input type='submit' value='POST'/>").addClass("post_button").attr("disabled", true).click(function () {
@@ -162,6 +169,10 @@ function genMethod(div, method, index) {
     form.append(postButton);
     var a = $("<a/>").text(window.location.pathname + url);
     form.append(a);
+
+    var copy_button = $("<span/>").addClass("copy_button").attr("data-clipboard-text", a.text()).attr("title", "复制链接");
+    form.append(copy_button);
+
     var textarea = $("<textarea name='key1' spellcheck='false'></textarea>").hide();
     form.append(textarea);
 

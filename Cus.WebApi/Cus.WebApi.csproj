@@ -90,13 +90,13 @@
     <EmbeddedResource Include="Resource\Cus.WebApi.XML" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Resource\lock.png" />
+    <None Include="Resource\Embed\lock.png" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Resource\loading.gif" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Resource\documentation.css" />
+    <None Include="Resource\documentation.css" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Resource\user.png" />
@@ -104,6 +104,33 @@
   <ItemGroup>
     <EmbeddedResource Include="Resource\list.png" />
   </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resource\ZeroClipboard.min.js" />
+    <EmbeddedResource Include="Resource\ZeroClipboard.swf" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resource\jquery.tipsy.js" />
+    <None Include="Resource\tipsy.css" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resource\tipsy.min.css">
+      <DependentUpon>tipsy.css</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resource\jquery.tipsy.min.js">
+      <DependentUpon>jquery.tipsy.js</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resource\Embed\clipboard.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resource\documentation.min.css">
+      <DependentUpon>documentation.css</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

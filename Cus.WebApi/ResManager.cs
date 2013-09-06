@@ -81,6 +81,8 @@ namespace Cus.WebApi
                     return "image/png";
                 case ".gif":
                     return "image/gif";
+                case ".swf":
+                    return "application/x-shockwave-flash";
                 default:
                     return "text/html";
             }
