@@ -19,14 +19,14 @@
     var method_div_top = $("<div/>").attr("id", "method_div_top");
     main_method.append(method_div_top);
 
-    var list_button = $("<img/>").attr("src", "?res=list.png").attr("id", "list_button").attr("title","收起").tipsy({ fade: true, gravity: 'n' });
+    var list_button = $("<img/>").attr("src", "?res=list.png").attr("id", "list_button").attr("title","收起").tipsy({ fade: true });
     main_title.append(list_button);
 
     var user_div = $("<div/>").attr("id", "user_div");
     main_title.append(user_div);
 
-    var user_label = $("<label/>");
-    var user_button = $("<img/>").attr("src", "?res=user.png").attr("id", "user_button").attr("title", "当前用户").tipsy({ fade: true, gravity: 'n' })
+    var user_label = $("<label/>").attr("title", "当前用户").tipsy({ fade: true });
+    var user_button = $("<img/>").attr("src", "?res=user.png").attr("id", "user_button");
     user_div.append(user_button).append(user_label).hide();
 
     //var user_label = $("<label/>");
@@ -95,7 +95,7 @@
                 main_method.animate({ scrollTop: dy }, 120);
             });
 
-            var li = $("<li/>").append(nav).attr("title", method.Documentation).tipsy({ fade: true, gravity: 'n' });
+            var li = $("<li/>").append(nav).attr("title", method.Documentation).tipsy({ fade: true, gravity: 's' });
             ul.append(li);
 
             ++index;
@@ -109,7 +109,7 @@
                     var copy_buttons = main_method.find(".copy_button")
                     var clip = new ZeroClipboard(copy_buttons);
                     clip.on("load", function (t) {
-                        return $(t.htmlBridge).tipsy();
+                        return $(t.htmlBridge).tipsy({ offset: 6 });
                     });
                     clip.on("complete", function (t) {
                         var e;
@@ -157,7 +157,7 @@ function genMethod(div, method, index) {
 
     var form = $("<form target='_blank' method='POST'/>").attr("action", url).data("origin_url", url);
     if (method.NeedAuth) {
-        var lock = $("<span class='lock'/>").attr("title", "此接口需要验证").tipsy({ fade: true, gravity: 'n' });
+        var lock = $("<span class='lock'/>").attr("title", "此接口需要验证").tipsy({ fade: true });
         form.append(lock);
     }
 
