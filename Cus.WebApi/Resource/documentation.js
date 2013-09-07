@@ -19,7 +19,7 @@
     var method_div_top = $("<div/>").attr("id", "method_div_top");
     main_method.append(method_div_top);
 
-    var list_button = $("<img/>").attr("src", "?res=list.png").attr("id", "list_button").attr("title","收起").tipsy({ fade: true });
+    var list_button = $("<img/>").attr("src", "?res=list.png").attr("id", "list_button");
     main_title.append(list_button);
 
     var user_div = $("<div/>").attr("id", "user_div");
@@ -29,44 +29,14 @@
     var user_button = $("<img/>").attr("src", "?res=user.png").attr("id", "user_button");
     user_div.append(user_button).append(user_label).hide();
 
-    //var user_label = $("<label/>");
-    //var user_text = $("<input type='text' maxlength='100'/>").attr("id", "user_text").blur(function () {
-    //    var debug_user = $(this).val().trim();
-    //    user_label.text(debug_user);
-    //    main_method.children(".method_div").children(".method_title:first").find("form:first").each(function () {
-    //        var form = $(this);
-    //        if (debug_user.length > 0) {
-    //            form.attr("action", form.data("origin_url") + "&user=" + debug_user);
-    //        }
-    //        else {
-    //            form.attr("action", form.data("origin_url"));
-    //        }
-    //    });
-    //    user_text.animate({ width: "toggle" }, "fast");
-    //    user_label.fadeIn("fast");
-    //});
-
-    //var user_button = $("<img/>").attr("src", "?res=user.png").attr("id", "user_button").click(function () {
-    //    if (!user_text.is(":visible")) {
-    //        user_text.animate({ width: "toggle" }, "fast");
-    //        user_label.fadeOut("fast");
-    //        user_text.focus();
-    //    }
-    //});
-
-    //user_div.append(user_text).append(user_button).append(user_label);
-    //user_text.hide();
-
     list_button.click(function () {
         if ($(main_directory).is(":animated") || $(main_method).is(":animated")) return;
         if (main_directory.is(":visible")) {
-            list_button.attr("title", "展开").tipsy("show");
             main_directory.fadeOut("fast", function () {
                 main_method.animate({ width: "100%" }, "fast");
             });
         }
         else {
-            list_button.attr("title", "收起").tipsy("show");
             main_method.animate({ width: "75%" }, "fast", function () {
                 main_directory.fadeIn("fast", function () {
                 });
@@ -109,7 +79,7 @@
                     var copy_buttons = main_method.find(".copy_button")
                     var clip = new ZeroClipboard(copy_buttons);
                     clip.on("load", function (t) {
-                        return $(t.htmlBridge).tipsy({ offset: 6 });
+                        return $(t.htmlBridge).tipsy({ delayIn: 0, offset: 6 });
                     });
                     clip.on("complete", function (t) {
                         var e;
@@ -119,7 +89,7 @@
                     });
                 }
                 else {
-                    main_method.find(".copy_button").hide(); 
+                    main_method.find(".copy_button").hide();
                 }
             }
         });
