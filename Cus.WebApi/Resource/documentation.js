@@ -75,22 +75,6 @@
                 loading.fadeOut("fast");
                 root.append(div);
                 refreshUser();
-                if (ZeroClipboard.detectFlashSupport()) {
-                    var copy_buttons = main_method.find(".copy_button")
-                    var clip = new ZeroClipboard(copy_buttons);
-                    clip.on("load", function (t) {
-                        return $(t.htmlBridge).tipsy({ delayIn: 0, offset: 6 });
-                    });
-                    clip.on("complete", function (t) {
-                        var e;
-                        return e = $(t.htmlBridge),
-                        e.prop("title", "复制成功！"),
-                        e.tipsy("show");
-                    });
-                }
-                else {
-                    main_method.find(".copy_button").hide();
-                }
             }
         });
     }
@@ -139,9 +123,6 @@ function genMethod(div, method, index) {
     form.append(postButton);
     var a = $("<a/>").text(window.location.pathname + url);
     form.append(a);
-
-    var copy_button = $("<span/>").addClass("copy_button").attr("data-clipboard-text", a.text()).attr("title", "复制链接");
-    form.append(copy_button);
 
     var textarea = $("<textarea name='key1' spellcheck='false'></textarea>").hide();
     form.append(textarea);

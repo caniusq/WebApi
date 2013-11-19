@@ -105,10 +105,6 @@
     <EmbeddedResource Include="Resource\list.png" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Resource\ZeroClipboard.min.js" />
-    <EmbeddedResource Include="Resource\ZeroClipboard.swf" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="Resource\jquery.tipsy.js" />
     <None Include="Resource\tipsy.css" />
   </ItemGroup>
@@ -121,9 +117,6 @@
     <EmbeddedResource Include="Resource\jquery.tipsy.min.js">
       <DependentUpon>jquery.tipsy.js</DependentUpon>
     </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resource\Embed\clipboard.png" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Resource\documentation.min.css">
