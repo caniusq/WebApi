@@ -5,7 +5,7 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{C0664DB8-E5F2-418C-95CD-89A76B60B9AC}</ProjectGuid>
+    <ProjectGuid>{5EAFAD96-60A4-4EE3-94C7-34D123A1E1B7}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Cus.WebApi</RootNamespace>
