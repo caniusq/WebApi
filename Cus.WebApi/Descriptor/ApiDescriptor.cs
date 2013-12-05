@@ -44,6 +44,7 @@ namespace Cus.WebApi
                 bool needAuth = methodAuthAttr != null ? methodAuthAttr.NeedAuth : auth;
                 var item = new MethodDescriptor(info, new List<ApiCodeAttribute>(attrs), needAuth);
                 _methods.Add(item);
+                if (_methodsDic.ContainsKey(info.Name)) throw new ApplicationException("不支持重载");
                 _methodsDic.Add(info.Name, item);
             }
         }

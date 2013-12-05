@@ -11,7 +11,7 @@
         </member>
         <member name="M:Cus.WebApi.ApiAuthAttribute.#ctor(System.Boolean)">
             <summary>
-            标记是否需要身份验证
+            身份验证特性
             </summary>
             <param name="needAuth">是否需要身份验证</param>
         </member>
@@ -81,27 +81,27 @@
         </member>
         <member name="F:Cus.WebApi.ApiException.CODE_SUCCESS">
             <summary>
-            成功的返回
+            200:成功的返回
             </summary>
         </member>
         <member name="F:Cus.WebApi.ApiException.CODE_ERROR">
             <summary>
-            服务异常
+            201:服务异常
             </summary>
         </member>
         <member name="F:Cus.WebApi.ApiException.CODE_MISS_METHOD">
             <summary>
-            方法不存在
+            202:方法不存在
             </summary>
         </member>
-        <member name="F:Cus.WebApi.ApiException.CODE_MISS_ARG">
+        <member name="F:Cus.WebApi.ApiException.CODE_ARG_ERROR">
             <summary>
-            缺少参数
+            203:参数错误
             </summary>
         </member>
         <member name="F:Cus.WebApi.ApiException.CODE_UNAUTH">
             <summary>
-            没有权限
+            204:没有权限
             </summary>
         </member>
         <member name="M:Cus.WebApi.ApiException.#ctor(System.String,System.Int32)">
@@ -149,11 +149,12 @@
             标记返回码
             </summary>
         </member>
-        <member name="M:Cus.WebApi.ApiCodeAttribute.#ctor(System.Int32)">
+        <member name="M:Cus.WebApi.ApiCodeAttribute.#ctor(System.Int32,System.String)">
             <summary>
             返回码特性
             </summary>
             <param name="code">返回码</param>
+            <param name="code">说明</param>
         </member>
         <member name="P:Cus.WebApi.ApiCodeAttribute.Code">
             <summary>
@@ -182,12 +183,12 @@
         </member>
         <member name="T:Cus.WebApi.DocumentationAttribute">
             <summary>
-            文档属性
+            标记文档
             </summary>
         </member>
         <member name="M:Cus.WebApi.DocumentationAttribute.#ctor(System.String)">
             <summary>
-            文档属性
+            文档特性
             </summary>
             <param name="path">文档路径</param>
         </member>
