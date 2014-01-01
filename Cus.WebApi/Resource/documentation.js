@@ -282,7 +282,7 @@ function genItem(tbody, item) {
     var can_null_cell = $("<td/>").addClass("can_null_cell").text(item.Def.CanNull);
     row.append(can_null_cell);
 
-    var doc_cell = $("<td/>").addClass("doc_cell").text(item.Documentation);
+    var doc_cell = $("<td/>").addClass("doc_cell").html(item.Documentation);
     row.append(doc_cell);
 }
 
