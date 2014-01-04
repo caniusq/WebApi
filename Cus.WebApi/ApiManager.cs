@@ -27,7 +27,7 @@ namespace Cus.WebApi
             {
                 lock (_cache)
                 {
-                    if (!_cache.ContainsKey(type))
+                    if (!_cache.TryGetValue(type, out manager))
                     {
                         manager = new ApiManager(type);
                         _cache.Add(type, manager);
@@ -198,6 +198,7 @@ namespace Cus.WebApi
                     resp.code = ApiException.CODE_UNAUTH;
                     resp.reason = "没有权限";
                     result.Response = resp;
+                    result.Response.redirect = context.Response.RedirectLocation;
                     return result;
                 }
 

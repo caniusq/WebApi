@@ -222,6 +222,11 @@
             错误堆栈
             </summary>
         </member>
+        <member name="P:Cus.WebApi.Response.redirect">
+            <summary>
+            重定向地址
+            </summary>
+        </member>
         <member name="P:Cus.WebApi.Response.User">
             <summary>
             用户身份信息

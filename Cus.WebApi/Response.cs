@@ -32,6 +32,10 @@ namespace Cus.WebApi
         /// </summary>
         public string stacktrace { get; set; }
         /// <summary>
+        /// 重定向地址
+        /// </summary>
+        public string redirect { get; set; }
+        /// <summary>
         /// 用户身份信息
         /// </summary>
         public Identity User { get; set; }
