@@ -73,7 +73,11 @@ namespace Cus.WebApi
             }
             else
             {
-                if (ApiManager.IsDebug && apiManager.EnableDocumentation())
+                if (!ApiManager.IsDebug)
+                {
+                    context.Response.StatusCode = 401;
+                }
+                else if (apiManager.EnableDocumentation())
                 {
                     if (method == string.Empty)
                     {
@@ -91,6 +95,11 @@ namespace Cus.WebApi
                             docApiManager.InvokeWebMethod(context, new DocumentApi(apiManager.ApiDescriptor), "GetApiDescriptor");
                         }
                     }
+                }
+                else
+                {
+                    string returnString = "没有可用的文档，请定义Documentation特性。";
+                    context.Response.Write(returnString);
                 }
             }
         }
