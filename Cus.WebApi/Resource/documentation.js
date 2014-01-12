@@ -124,7 +124,7 @@ function genMethod(div, method, index) {
     var a = $("<a/>").text(window.location.pathname + url);
     form.append(a);
 
-    var textarea = $("<textarea name='key1' spellcheck='false'></textarea>").hide();
+    var textarea = $("<textarea name='C35A353FD50A49E3A4DDF3E2B1DD04D5' spellcheck='false'></textarea>").hide();
     form.append(textarea);
 
     container.append(form);

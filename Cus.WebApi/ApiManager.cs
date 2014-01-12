@@ -17,6 +17,7 @@ namespace Cus.WebApi
     /// </summary>
     class ApiManager
     {
+        const string DOCUMENTATION_FORM_KEY = "C35A353FD50A49E3A4DDF3E2B1DD04D5";
         private static bool? _isDebug;
         private static Dictionary<Type, ApiManager> _cache = new Dictionary<Type, ApiManager>();
 
@@ -101,7 +102,8 @@ namespace Cus.WebApi
                 List<object> paraList = null;
                 if (context.Request.Form.Count > 0)
                 {
-                    inputString = context.Request.Form[0];
+                    string val = context.Request.Form.Get(DOCUMENTATION_FORM_KEY);
+                    if(!string.IsNullOrEmpty(val)) inputString = val;
                 }
                 else if (context.Request.ContentLength != 0)
                 {
