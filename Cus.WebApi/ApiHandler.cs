@@ -1,4 +1,5 @@
 ﻿using Cus.WebApi.Configuration;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -85,14 +86,13 @@ namespace Cus.WebApi
                     }
                     else
                     {
-                        var docApiManager = ApiManager.GetOrCreate(typeof(DocumentApi));
                         if ("GET".Equals(context.Request.HttpMethod, StringComparison.CurrentCultureIgnoreCase))
                         {
                             ResManager.ProcessRes(context, "documentation.html");
                         }
                         else if ("POST".Equals(context.Request.HttpMethod, StringComparison.CurrentCultureIgnoreCase))
                         {
-                            docApiManager.InvokeWebMethod(context, new DocumentApi(apiManager.ApiDescriptor), "GetApiDescriptor");
+                            context.Response.Write(JsonConvert.SerializeObject(apiManager.ApiDescriptor, Formatting.Indented));
                         }
                     }
                 }

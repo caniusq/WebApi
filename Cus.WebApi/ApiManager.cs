@@ -92,7 +92,7 @@ namespace Cus.WebApi
             }
         }
 
-        public void InvokeWebMethod(HttpContext context, object api, string methodName)
+        public void InvokeWebMethod(HttpContext context, ApiHandler api, string methodName)
         {
             var result = PrepareMethod(context, api, methodName);
 
@@ -132,7 +132,7 @@ namespace Cus.WebApi
             }
         }
 
-        private PrepareRusult PrepareMethod(HttpContext context, object api, string methodName)
+        private PrepareRusult PrepareMethod(HttpContext context, ApiHandler api, string methodName)
         {
             var result = new PrepareRusult();
 
@@ -156,72 +156,66 @@ namespace Cus.WebApi
                 result.Response = (Response)Activator.CreateInstance(method.ResponseParam.Type);
             }
 
-            var actualApi = api as ApiHandler;
-            if (actualApi != null)
+            var resp = result.Response;
+            Identity user = null;
+            if (IsDebug)
             {
-                var resp = result.Response;
-                Identity user = null;
-                if (IsDebug)
+                string uid = context.Request.QueryString["user"];
+                if (!string.IsNullOrEmpty(uid))
                 {
-                    string uid = context.Request.QueryString["user"];
-                    if (!string.IsNullOrEmpty(uid))
-                    {
-                        user = new Identity(uid, "debug");
-                        actualApi.Authetication.SaveUser(context, user);
-                    }
+                    user = new Identity(uid, "debug");
+                    api.Authetication.SaveUser(context, user);
                 }
+            }
 
-                if (user == null)
-                    user = actualApi.Authetication.GetUser(context);
+            if (user == null)
+                user = api.Authetication.GetUser(context);
 
-                if (user == null || !user.IsAuthenticated)
+            if (user == null || !user.IsAuthenticated)
+            {
+                try
                 {
-                    try
-                    {
-                        user = actualApi.Authetication.VerifyUser(context);
-                        if (user != null)
-                            actualApi.Authetication.SaveUser(context, user);
-                    }
-                    catch (Exception ex)
-                    {
-                        resp.code = ApiException.CODE_ERROR;
-                        resp.reason = "验证时发生未知错误";
-                        if (actualApi != null)
-                            actualApi.InvokeUnhandledException(context, methodName, null, ex);
-                        if (ApiManager.IsDebug)
-                            resp.stacktrace = ex.Message + " " + ex.StackTrace;
-                        result.Response = resp;
-                        return result;
-                    }
+                    user = api.Authetication.VerifyUser(context);
+                    if (user != null)
+                        api.Authetication.SaveUser(context, user);
                 }
-
-                if (method.NeedAuth && (user == null || !user.IsAuthenticated))
+                catch (Exception ex)
                 {
-                    resp.code = ApiException.CODE_UNAUTH;
-                    resp.reason = "没有权限";
+                    resp.code = ApiException.CODE_ERROR;
+                    resp.reason = "验证时发生未知错误";
+                    api.InvokeUnhandledException(context, methodName, null, ex);
+                    if (ApiManager.IsDebug)
+                        resp.stacktrace = ex.Message + " " + ex.StackTrace;
                     result.Response = resp;
-                    result.Response.redirect = context.Response.RedirectLocation;
                     return result;
                 }
-
-                if (user == null)
-                {
-                    user = new Identity();
-                    actualApi.TempUser = user;
-                }
-                    
-                resp.User = user;
-                result.Response = resp;
             }
+
+            if (method.NeedAuth && (user == null || !user.IsAuthenticated))
+            {
+                resp.code = ApiException.CODE_UNAUTH;
+                resp.reason = "没有权限";
+                result.Response = resp;
+                result.Response.redirect = context.Response.RedirectLocation;
+                return result;
+            }
+
+            if (user == null)
+            {
+                user = new Identity();
+                api.TempUser = user;
+            }
+
+            resp.User = user;
+            result.Response = resp;
 
             return result;
         }
 
-        public void InvokeMethod(HttpContext context, PrepareRusult prepareResult, object api, string inputString, List<object> paraList = null)
+        public void InvokeMethod(HttpContext context, PrepareRusult prepareResult, ApiHandler api, string inputString, List<object> paraList = null)
         {
             var method = prepareResult.MethodDescriptor;
             var resp = prepareResult.Response;
-            var actualApi = api as ApiHandler;
             string methodName = method.Name;
 
             if (paraList == null)
@@ -280,8 +274,7 @@ namespace Cus.WebApi
                 {
                     resp.code = ApiException.CODE_ERROR;
                     resp.reason = ex.InnerException.Message;
-                    if (actualApi != null)
-                        actualApi.InvokeUnhandledException(context, methodName, inputString, ex.InnerException);
+                    api.InvokeUnhandledException(context, methodName, inputString, ex.InnerException);
                     if (ApiManager.IsDebug)
                         resp.stacktrace = ex.InnerException.Message + " " + ex.InnerException.StackTrace;
                 }
@@ -299,11 +292,8 @@ namespace Cus.WebApi
                 setMethod.Invoke(resp, new object[] { ret });
             }
 
-            if (actualApi != null)
-            {
-                if (actualApi.TempUser != null) resp.User = actualApi.TempUser;
+            if (api.TempUser != null) resp.User = api.TempUser;
                 if (resp.User == null) resp.User = new Identity();
-            }
         }
 
         public bool EnableDocumentation()

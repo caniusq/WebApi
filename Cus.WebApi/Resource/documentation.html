@@ -17,7 +17,7 @@
                 url: "",
                 type: "POST",
                 success: function (data) {
-                    genApi(div, loading, data.result);
+                    genApi(div, loading, data);
                 },
                 error: function (XMLHttpRequest, textStatus, errorThrown) {
                     loading.remove();
