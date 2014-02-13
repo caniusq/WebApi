@@ -12,8 +12,8 @@ namespace Cus.WebApi
         {
             var dic = new RouteValueDictionary(new
             {
-                category = UrlParameter.Optional,
-                action = UrlParameter.Optional
+                handler = UrlParameter.Optional,
+                method = UrlParameter.Optional
             });
             routes.Add(name, new Route("api/{handler}/{method}", dic, new ApiRouteHandler()));
         }
