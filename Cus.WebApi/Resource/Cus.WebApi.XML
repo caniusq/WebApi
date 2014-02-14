@@ -46,6 +46,19 @@
             <param name="context">上下文</param>
             <param name="user">用户</param>
         </member>
+        <member name="T:Cus.WebApi.RouteCollectionExtensions">
+            <summary>
+            WebApi路由扩展
+            </summary>
+        </member>
+        <member name="M:Cus.WebApi.RouteCollectionExtensions.MapWebApiRoute(System.Web.Routing.RouteCollection,System.String,System.String)">
+            <summary>
+            注册WebApi路由
+            </summary>
+            <param name="routes">路由集合</param>
+            <param name="name">路由名称</param>
+            <param name="urlBase">路由基路径</param>
+        </member>
         <member name="T:Cus.WebApi.UnhandledApiExceptionEventArgs">
             <summary>
             表示除ApiException以外的异常

@@ -50,9 +50,13 @@ namespace Cus.WebApi.Test
 
         }
 
-        public TestData method4(string p1, float p2, bool p3, DateTime? p4)
+        /// <summary>
+        /// method4
+        /// </summary>
+        /// <returns>zzz</returns>
+        public string method4()
         {
-            return null;
+            return "abc";
         }
         public TestData method5(string p1, float p2, bool p3, DateTime? p4)
         {

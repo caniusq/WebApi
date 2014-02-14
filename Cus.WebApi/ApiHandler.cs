@@ -57,8 +57,8 @@ namespace Cus.WebApi
         /// <param name="context">上下文</param>
         public virtual void ProcessRequest(HttpContext context)
         {
-            string method = context.Request.QueryString["m"];
-            string res = context.Request.QueryString["res"];
+            string method = (string)context.Items["method"];
+            string queryUser = context.Request.QueryString["user"];
             context.Response.ContentEncoding = _encoding;
             context.Response.ContentType = "application/json";
 
@@ -68,10 +68,6 @@ namespace Cus.WebApi
             {
                 apiManager.InvokeWebMethod(context, this, method);
             }
-            else if (!string.IsNullOrEmpty(res))
-            {
-                ResManager.ProcessRes(context, res);
-            }
             else
             {
                 if (!ApiManager.IsDebug)
@@ -80,7 +76,7 @@ namespace Cus.WebApi
                 }
                 else if (apiManager.EnableDocumentation())
                 {
-                    if (method == string.Empty)
+                    if (!string.IsNullOrEmpty(queryUser))
                     {
                         apiManager.InvokeReturnUser(context, User);
                     }

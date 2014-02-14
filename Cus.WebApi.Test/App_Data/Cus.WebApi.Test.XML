@@ -87,5 +87,11 @@
             </summary>
             <param name="p1">p1 的摘要说明</param>
         </member>
+        <member name="M:Cus.WebApi.Test.test.method4">
+            <summary>
+            method4
+            </summary>
+            <returns>zzz</returns>
+        </member>
     </members>
 </doc>

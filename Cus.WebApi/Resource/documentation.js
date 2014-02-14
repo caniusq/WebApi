@@ -19,14 +19,14 @@
     var method_div_top = $("<div/>").attr("id", "method_div_top");
     main_method.append(method_div_top);
 
-    var list_button = $("<img/>").attr("src", "?res=list.png").attr("id", "list_button");
+    var list_button = $("<img/>").attr("src", "cus.webapi.res/list.png").attr("id", "list_button");
     main_title.append(list_button);
 
     var user_div = $("<div/>").attr("id", "user_div");
     main_title.append(user_div);
 
     var user_label = $("<label/>").attr("title", "当前用户").tipsy({ fade: true });
-    var user_button = $("<img/>").attr("src", "?res=user.png").attr("id", "user_button");
+    var user_button = $("<img/>").attr("src", "cus.webapi.res/user.png").attr("id", "user_button");
     user_div.append(user_button).append(user_label).hide();
 
     list_button.click(function () {
@@ -82,7 +82,7 @@
 
 function refreshUser() {
     $.ajax({
-        url: "?m=",
+        url: window.location.pathname + "?user=1",
         type: "POST",
         success: function (data) {
             var user = data.User;
@@ -101,7 +101,7 @@ function refreshUser() {
 }
 
 function genMethod(div, method, index) {
-    var url = "?m=" + method.Name;
+    var url = window.location.pathname + '/' + method.Name;
 
     var method_title = $("<div/>").addClass("method_title");
     method_title.append($("<div/>").html((index + 1) + ". " + method.Documentation));
@@ -121,7 +121,7 @@ function genMethod(div, method, index) {
         }, 1000);
     });
     form.append(postButton);
-    var a = $("<a/>").text(window.location.pathname + url);
+    var a = $("<a/>").text(url);
     form.append(a);
 
     var textarea = $("<textarea name='C35A353FD50A49E3A4DDF3E2B1DD04D5' spellcheck='false'></textarea>").hide();

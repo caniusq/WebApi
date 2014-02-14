@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Security.Cryptography;
@@ -10,11 +11,22 @@ namespace Cus.WebApi
 {
     class ResManager
     {
+        static ResManager()
+        {
+            var info = new System.IO.FileInfo(typeof(ApiManager).Assembly.Location);
+            DateTime t = info.LastWriteTimeUtc;
+            _lastModified = new DateTime(t.Year, t.Month, t.Day, t.Hour, t.Minute, t.Second);
+            _cinfo = CultureInfo.CreateSpecificCulture("en-US");
+            _lastModifiedString = _lastModified.ToString("ddd, dd MMM yyyy HH':'mm':'ss 'GMT'", _cinfo);
+        }
+
+        private static CultureInfo _cinfo;
+        private static DateTime _lastModified;
+        private static string _lastModifiedString;
         private static Dictionary<string, string> _etags = new Dictionary<string, string>();
 
         public static string GetResourceId(string res)
         {
-            var ss = typeof(ApiManager).Assembly.GetManifestResourceNames();
             return "Cus.WebApi.Resource." + res;
         }
 
@@ -42,6 +54,21 @@ namespace Cus.WebApi
                     }
                 }
             }
+
+            context.Response.AddHeader("Last-Modified", _lastModifiedString);
+            context.Response.AddHeader("Etag", etag);
+
+            string imsString = context.Request.Headers["If-Modified-Since"];
+            if (!string.IsNullOrEmpty(imsString))
+            {
+                DateTime ifModifiedSince = DateTime.Parse(imsString, _cinfo, DateTimeStyles.AdjustToUniversal);
+                if (_lastModified <= ifModifiedSince)
+                {
+                    context.Response.StatusCode = 304;
+                    return;
+                }
+            }
+
             string match = context.Request.Headers.Get("If-None-Match");
             if (!string.IsNullOrEmpty(match) && match == etag)
             {
@@ -65,7 +92,6 @@ namespace Cus.WebApi
                     context.Response.OutputStream.Write(buffer, 0, len);
                 }
                 context.Response.OutputStream.Flush();
-                context.Response.AddHeader("Etag", etag);
             }
         }
 

@@ -6,16 +6,25 @@ using System.Web.Routing;
 
 namespace Cus.WebApi
 {
+    /// <summary>
+    /// WebApi路由扩展
+    /// </summary>
     public static class RouteCollectionExtensions
     {
-        public static void MapWebApiRoute(this RouteCollection routes, string name)
+        /// <summary>
+        /// 注册WebApi路由
+        /// </summary>
+        /// <param name="routes">路由集合</param>
+        /// <param name="name">路由名称</param>
+        /// <param name="urlBase">路由基路径</param>
+        public static void MapWebApiRoute(this RouteCollection routes, string name, string urlBase = "api")
         {
             var dic = new RouteValueDictionary(new
             {
                 handler = UrlParameter.Optional,
                 method = UrlParameter.Optional
             });
-            routes.Add(name, new Route("api/{handler}/{method}", dic, new ApiRouteHandler()));
+            routes.Add(name, new Route(urlBase + "/{handler}/{method}", dic, new ApiRouteHandler()));
         }
     }
 }

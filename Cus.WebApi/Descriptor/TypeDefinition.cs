@@ -156,6 +156,7 @@ namespace Cus.WebApi
             }
         }
 
+        [JsonIgnore]
         public Type SubType
         {
             get
