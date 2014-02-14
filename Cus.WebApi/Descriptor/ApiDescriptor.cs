@@ -22,7 +22,7 @@ namespace Cus.WebApi
             _methodsDic = new Dictionary<string, MethodDescriptor>(list.Count, StringComparer.CurrentCultureIgnoreCase);
 
             var defaultCodes = new HashSet<int>();
-            foreach (ApiCodeAttribute attr in typeof(ApiHandler).GetCustomAttributes(typeof(ApiCodeAttribute), true))
+            foreach (ApiCodeAttribute attr in typeof(ApiController).GetCustomAttributes(typeof(ApiCodeAttribute), true))
             {
                 defaultCodes.Add(attr.Code);
             }
@@ -70,7 +70,7 @@ namespace Cus.WebApi
             var infos = t.GetMethods(BindingFlags.Public | BindingFlags.Instance);
             foreach (var info in infos)
             {
-                if (info.DeclaringType == typeof(Object) || info.DeclaringType == typeof(ApiHandler)) continue;
+                if (info.DeclaringType == typeof(Object) || info.DeclaringType == typeof(ApiController)) continue;
                 if ((info.Attributes & MethodAttributes.SpecialName) != 0) continue;
                 list.Add(info);
             }

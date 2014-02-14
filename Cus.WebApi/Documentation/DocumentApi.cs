@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Cus.WebApi
 {
-    class DocumentApi : ApiHandler
+    class DocumentApi : ApiController
     {
         private readonly ApiDescriptor _apiDescriptor;
         public DocumentApi(ApiDescriptor apiDescriptor)

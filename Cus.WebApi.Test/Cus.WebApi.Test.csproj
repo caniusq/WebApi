@@ -74,17 +74,13 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="api\test.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Entity.cs" />
-    <Compile Include="test.ashx.cs">
-      <DependentUpon>test.ashx</DependentUpon>
-    </Compile>
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="test.ashx" />
+    <Compile Include="api\test2.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Cus.WebApi\Cus.WebApi.csproj">

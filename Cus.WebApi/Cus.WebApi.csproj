@@ -49,6 +49,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ApiAuthAttribute.cs" />
+    <Compile Include="ApiHandler.cs" />
     <Compile Include="ApiRouteHandler.cs" />
     <Compile Include="Configuration\ApiConfigurationSection.cs" />
     <Compile Include="Configuration\AutheticationType.cs" />
@@ -63,7 +64,7 @@
     <Compile Include="UnhandledApiExceptionEventArgs.cs" />
     <Compile Include="ApiException.cs" />
     <Compile Include="Descriptor\ApiDescriptor.cs" />
-    <Compile Include="ApiHandler.cs" />
+    <Compile Include="ApiController.cs" />
     <Compile Include="ApiCodeAttribute.cs" />
     <Compile Include="Descriptor\TypeDefinition.cs" />
     <Compile Include="Descriptor\Descriptor.cs" />

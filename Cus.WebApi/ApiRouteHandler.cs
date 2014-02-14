@@ -31,54 +31,57 @@ namespace Cus.WebApi
             }
         }
 
-        private static Dictionary<string, Type> _handlerDic = new Dictionary<string, Type>();
-        private static Type FindHandlerType(string handlerName, HttpApplication app)
+        private static Dictionary<string, Type> _controllerDic = new Dictionary<string, Type>();
+        private static Type FindControllerType(string controllerName, HttpApplication app)
         {
-            Type handlerType;
-            if (_handlerDic.TryGetValue(handlerName, out handlerType)) return handlerType;
+            Type controllerType;
+            if (_controllerDic.TryGetValue(controllerName, out controllerType)) return controllerType;
             lock (_syncRoot)
             {
-                if (_handlerDic.TryGetValue(handlerName, out handlerType)) return handlerType;
+                if (_controllerDic.TryGetValue(controllerName, out controllerType)) return controllerType;
 
                 var asm = GetGlobalAssembly(app);
 
                 foreach (Type type in asm.GetTypes())
                 {
-                    if (handlerName.Equals(type.Name, StringComparison.CurrentCultureIgnoreCase))
+                    if (controllerName.Equals(type.Name, StringComparison.CurrentCultureIgnoreCase))
                     {
-                        if (!type.IsSubclassOf(typeof(ApiHandler))) continue;
-                        handlerType = type;
+                        if (!type.IsSubclassOf(typeof(ApiController))) continue;
+                        controllerType = type;
                         break;
                     }
                 }
-                if (handlerType == null) throw new ApplicationException(handlerName + " WebApi Not Found.");
-                _handlerDic.Add(handlerName, handlerType);
-                return handlerType;
+
+                if (controllerType != null)
+                    _controllerDic.Add(controllerName, controllerType);
+
+                return controllerType;
             }
         }
 
         public System.Web.IHttpHandler GetHttpHandler(RequestContext requestContext)
         {
-            object handler = requestContext.RouteData.Values["handler"];
-            object method = requestContext.RouteData.Values["method"];
+            object controller = requestContext.RouteData.Values["controller"];
+            object action = requestContext.RouteData.Values["action"];
 
-            if (handler == UrlParameter.Optional)
+            if (controller == UrlParameter.Optional)
             {
                 throw new NotImplementedException();
             }
 
-            if ("special.res".Equals(handler))
+            if ("special.res".Equals(controller))
             {
-                requestContext.HttpContext.Items["res"] = (string)method;
+                requestContext.HttpContext.Items["res"] = (string)action;
                 return new ResHandler();
             }
-
-            if (method != UrlParameter.Optional)
+            
+            if (action != UrlParameter.Optional)
             {
-                requestContext.HttpContext.Items["method"] = (string)method;
+                requestContext.HttpContext.Items["action"] = (string)action;
             }
-            Type type = FindHandlerType((string)handler, requestContext.HttpContext.ApplicationInstance);
-            return (ApiHandler)Activator.CreateInstance(type);
+            Type type = FindControllerType((string)controller, requestContext.HttpContext.ApplicationInstance);
+            if (type == null) return new ApiHandler(null);
+            return new ApiHandler((ApiController)Activator.CreateInstance(type));
         }
     }
 }

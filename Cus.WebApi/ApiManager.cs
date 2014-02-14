@@ -92,7 +92,7 @@ namespace Cus.WebApi
             }
         }
 
-        public void InvokeWebMethod(HttpContext context, ApiHandler api, string methodName)
+        public void InvokeWebMethod(HttpContext context, ApiController api, string methodName)
         {
             var result = PrepareMethod(context, api, methodName);
 
@@ -132,7 +132,7 @@ namespace Cus.WebApi
             }
         }
 
-        private PrepareRusult PrepareMethod(HttpContext context, ApiHandler api, string methodName)
+        private PrepareRusult PrepareMethod(HttpContext context, ApiController api, string methodName)
         {
             var result = new PrepareRusult();
 
@@ -212,7 +212,7 @@ namespace Cus.WebApi
             return result;
         }
 
-        public void InvokeMethod(HttpContext context, PrepareRusult prepareResult, ApiHandler api, string inputString, List<object> paraList = null)
+        public void InvokeMethod(HttpContext context, PrepareRusult prepareResult, ApiController api, string inputString, List<object> paraList = null)
         {
             var method = prepareResult.MethodDescriptor;
             var resp = prepareResult.Response;

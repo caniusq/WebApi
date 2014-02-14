@@ -21,10 +21,10 @@ namespace Cus.WebApi
         {
             var dic = new RouteValueDictionary(new
             {
-                handler = UrlParameter.Optional,
-                method = UrlParameter.Optional
+                controller = UrlParameter.Optional,
+                action = UrlParameter.Optional
             });
-            routes.Add(name, new Route(urlBase + "/{handler}/{method}", dic, new ApiRouteHandler()));
+            routes.Add(name, new Route(urlBase + "/{controller}/{action}", dic, new ApiRouteHandler()));
         }
     }
 }

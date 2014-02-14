@@ -129,30 +129,19 @@
             获取或设置返回码
             </summary>
         </member>
-        <member name="T:Cus.WebApi.ApiHandler">
+        <member name="T:Cus.WebApi.ApiController">
             <summary>
-            接口处理基类
+            接口控制器
             </summary>
         </member>
-        <member name="M:Cus.WebApi.ApiHandler.ProcessRequest(System.Web.HttpContext)">
-            <summary>
-            不要重写此方法
-            </summary>
-            <param name="context">上下文</param>
-        </member>
-        <member name="M:Cus.WebApi.ApiHandler.OnUnhandledException(System.Web.HttpContext,Cus.WebApi.UnhandledApiExceptionEventArgs)">
+        <member name="M:Cus.WebApi.ApiController.OnUnhandledException(System.Web.HttpContext,Cus.WebApi.UnhandledApiExceptionEventArgs)">
             <summary>
             表示发生了除ApiException以外的异常
             </summary>
             <param name="context">上下文</param>
             <param name="arg">异常事件参数</param>
         </member>
-        <member name="P:Cus.WebApi.ApiHandler.IsReusable">
-            <summary>
-            是否可以重用
-            </summary>
-        </member>
-        <member name="P:Cus.WebApi.ApiHandler.User">
+        <member name="P:Cus.WebApi.ApiController.User">
             <summary>
             获取或设置用户身份信息
             </summary>

@@ -4,6 +4,23 @@
         <name>Cus.WebApi.Test</name>
     </assembly>
     <members>
+        <member name="M:Cus.WebApi.Test.api.test.SignIn(System.String,System.Collections.Generic.Dictionary{System.String,System.String},System.Int32,System.Nullable{System.DateTime})">
+            <summary>
+            method1 的摘要说明
+            </summary>
+            <param name="p1">p1 111的摘要说明</param>
+            <param name="p2">p2 的摘要说明</param>
+            <param name="p3">p3 的摘要说明</param>
+            <param name="p4">p4 的摘要说明</param>
+            <returns>method1测试返回数据</returns>
+        </member>
+        <member name="M:Cus.WebApi.Test.api.test.Logout(System.Int32)">
+            <summary>
+            Logout 的摘要说明
+            </summary>
+            <param name="p1">p1 的摘要说明</param>
+            <returns>method2测试返回数据</returns>
+        </member>
         <member name="T:Cus.WebApi.Test.TestData">
             <summary>
             测试数据的说明
@@ -59,39 +76,17 @@
             sub3的说明
             </summary>
         </member>
-        <member name="T:Cus.WebApi.Test.test">
+        <member name="T:Cus.WebApi.Test.api.test2">
             <summary>
-            test 的摘要说明
+            test2 的摘要说明
             </summary>
         </member>
-        <member name="M:Cus.WebApi.Test.test.SignIn(System.String,System.Collections.Generic.Dictionary{System.String,System.String},System.Int32,System.Nullable{System.DateTime})">
+        <member name="M:Cus.WebApi.Test.api.test2.Foo(System.String)">
             <summary>
-            method1 的摘要说明
+            Foo 的摘要说明
             </summary>
-            <param name="p1">p1 111的摘要说明</param>
-            <param name="p2">p2 的摘要说明</param>
-            <param name="p3">p3 的摘要说明</param>
-            <param name="p4">p4 的摘要说明</param>
-            <returns>method1测试返回数据</returns>
-        </member>
-        <member name="M:Cus.WebApi.Test.test.Logout(System.Int32)">
-            <summary>
-            Logout 的摘要说明
-            </summary>
-            <param name="p1">p1 的摘要说明</param>
-            <returns>method2测试返回数据</returns>
-        </member>
-        <member name="M:Cus.WebApi.Test.test.method3(System.Collections.Generic.IDictionary{System.String,System.String})">
-            <summary>
-            method3 的摘要说明
-            </summary>
-            <param name="p1">p1 的摘要说明</param>
-        </member>
-        <member name="M:Cus.WebApi.Test.test.method4">
-            <summary>
-            method4
-            </summary>
-            <returns>zzz</returns>
+            <param name="a">a 的摘要说明</param>
+            <returns>return value</returns>
         </member>
     </members>
 </doc>

@@ -1,8 +1,6 @@
-﻿using Cus.WebApi.Configuration;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Web;
@@ -10,64 +8,41 @@ using System.Web.SessionState;
 
 namespace Cus.WebApi
 {
-    /// <summary>
-    /// 接口处理基类
-    /// </summary>
-    [ApiCode(ApiException.CODE_SUCCESS, "成功的返回")]
-    [ApiCode(ApiException.CODE_ERROR, "服务异常")]
-    [ApiCode(ApiException.CODE_MISS_METHOD, "方法不存在")]
-    [ApiCode(ApiException.CODE_ARG_ERROR, "参数错误")]
-    [ApiCode(ApiException.CODE_UNAUTH, "没有权限")]
-    public abstract class ApiHandler : IHttpHandler, IRequiresSessionState
+    class ApiHandler : IHttpHandler, IRequiresSessionState
     {
-        private static object _locker = new object();
         private static Encoding _encoding = new UTF8Encoding(false);
-        private static IAuthetication _authetication;
 
-        internal IAuthetication Authetication
+        private readonly ApiController _api;
+        public ApiHandler(ApiController api)
         {
-            get
-            {
-                if (_authetication == null)
-                {
-                    lock (_locker)
-                    {
-                        if (_authetication == null)
-                        {
-                            _authetication = ConfigManager.CreateAuthetication();
-                            if (_authetication == null) _authetication = new DefaultAutheticationImpl();
-                        }
-                    }
-                }
-                return _authetication;
-            }
+            _api = api;
         }
 
-        /// <summary>
-        /// 是否可以重用
-        /// </summary>
         public bool IsReusable
         {
             get { return false; }
         }
 
-        /// <summary>
-        /// 不要重写此方法
-        /// </summary>
-        /// <param name="context">上下文</param>
-        public virtual void ProcessRequest(HttpContext context)
+        public void ProcessRequest(HttpContext context)
         {
-            string method = (string)context.Items["method"];
-            bool queryUser = "special.user".Equals(method);
+            if (_api == null)
+            {
+                context.Response.StatusCode = 404;
+                context.Response.Write("404 file not found.");
+                return;
+            }
+
+            string action = (string)context.Items["action"];
+            bool queryUser = "special.user".Equals(action);
 
             context.Response.ContentEncoding = _encoding;
             context.Response.ContentType = "application/json";
 
-            var apiManager = ApiManager.GetOrCreate(this.GetType());
+            var apiManager = ApiManager.GetOrCreate(_api.GetType());
 
-            if (!queryUser && !string.IsNullOrEmpty(method))
+            if (!queryUser && !string.IsNullOrEmpty(action))
             {
-                apiManager.InvokeWebMethod(context, this, method);
+                apiManager.InvokeWebMethod(context, _api, action);
             }
             else
             {
@@ -79,7 +54,7 @@ namespace Cus.WebApi
                 {
                     if (queryUser)
                     {
-                        apiManager.InvokeReturnUser(context, User);
+                        apiManager.InvokeReturnUser(context, _api.InternalUser);
                     }
                     else
                     {
@@ -98,40 +73,6 @@ namespace Cus.WebApi
                     string returnString = "没有可用的文档，请定义Documentation特性。";
                     context.Response.Write(returnString);
                 }
-            }
-        }
-
-        internal void InvokeUnhandledException(HttpContext context, string method, string input, Exception ex)
-        {
-            this.OnUnhandledException(context, new UnhandledApiExceptionEventArgs(method, input, ex));
-        }
-
-        /// <summary>
-        /// 表示发生了除ApiException以外的异常
-        /// </summary>
-        /// <param name="context">上下文</param>
-        /// <param name="arg">异常事件参数</param>
-        protected virtual void OnUnhandledException(HttpContext context, UnhandledApiExceptionEventArgs arg)
-        {
-        }
-
-        internal Identity TempUser { get; set; }
-
-        /// <summary>
-        /// 获取或设置用户身份信息
-        /// </summary>
-        protected Identity User
-        {
-            get
-            {
-                if (TempUser != null) return TempUser;
-                return Authetication.GetUser(HttpContext.Current);
-            }
-            set
-            {
-                Authetication.SaveUser(HttpContext.Current, value);
-                TempUser = value;
-                if (TempUser == null) TempUser = new Identity();
             }
         }
     }
