@@ -19,14 +19,14 @@
     var method_div_top = $("<div/>").attr("id", "method_div_top");
     main_method.append(method_div_top);
 
-    var list_button = $("<img/>").attr("src", "cus.webapi.res/list.png").attr("id", "list_button");
+    var list_button = $("<div/>").attr("id", "list_button");
     main_title.append(list_button);
 
     var user_div = $("<div/>").attr("id", "user_div");
     main_title.append(user_div);
 
     var user_label = $("<label/>").attr("title", "当前用户").tipsy({ fade: true });
-    var user_button = $("<img/>").attr("src", "cus.webapi.res/user.png").attr("id", "user_button");
+    var user_button = $("<div/>").attr("id", "user_button");
     user_div.append(user_button).append(user_label).hide();
 
     list_button.click(function () {
@@ -82,7 +82,7 @@
 
 function refreshUser() {
     $.ajax({
-        url: window.location.pathname + "?user=1",
+        url: window.location.pathname + "/special.user",
         type: "POST",
         success: function (data) {
             var user = data.User;

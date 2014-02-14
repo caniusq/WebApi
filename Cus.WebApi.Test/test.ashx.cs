@@ -29,12 +29,12 @@ namespace Cus.WebApi.Test
         }
 
         /// <summary>
-        /// method2 的摘要说明
+        /// Logout 的摘要说明
         /// </summary>
         /// <param name="p1">p1 的摘要说明</param>
         /// <returns>method2测试返回数据</returns>
-        [ApiAuth(false)]
-        public string SignIn2(int p1)
+        [ApiAuth(true)]
+        public string Logout(int p1)
         {
             base.User = null;
             return null;

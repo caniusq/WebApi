@@ -95,7 +95,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
-    <None Include="Resource\Embed\lock.png" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Resource\loading.gif" />
@@ -128,7 +127,9 @@
       <DependentUpon>documentation.css</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <EmbeddedResource Include="Resource\lock.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

@@ -74,9 +74,9 @@
             <param name="p4">p4 的摘要说明</param>
             <returns>method1测试返回数据</returns>
         </member>
-        <member name="M:Cus.WebApi.Test.test.SignIn2(System.Int32)">
+        <member name="M:Cus.WebApi.Test.test.Logout(System.Int32)">
             <summary>
-            method2 的摘要说明
+            Logout 的摘要说明
             </summary>
             <param name="p1">p1 的摘要说明</param>
             <returns>method2测试返回数据</returns>

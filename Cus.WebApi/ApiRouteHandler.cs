@@ -67,7 +67,7 @@ namespace Cus.WebApi
                 throw new NotImplementedException();
             }
 
-            if ("cus.webapi.res".Equals(handler))
+            if ("special.res".Equals(handler))
             {
                 requestContext.HttpContext.Items["res"] = (string)method;
                 return new ResHandler();

@@ -58,13 +58,14 @@ namespace Cus.WebApi
         public virtual void ProcessRequest(HttpContext context)
         {
             string method = (string)context.Items["method"];
-            string queryUser = context.Request.QueryString["user"];
+            bool queryUser = "special.user".Equals(method);
+
             context.Response.ContentEncoding = _encoding;
             context.Response.ContentType = "application/json";
 
             var apiManager = ApiManager.GetOrCreate(this.GetType());
 
-            if (!string.IsNullOrEmpty(method))
+            if (!queryUser && !string.IsNullOrEmpty(method))
             {
                 apiManager.InvokeWebMethod(context, this, method);
             }
@@ -76,7 +77,7 @@ namespace Cus.WebApi
                 }
                 else if (apiManager.EnableDocumentation())
                 {
-                    if (!string.IsNullOrEmpty(queryUser))
+                    if (queryUser)
                     {
                         apiManager.InvokeReturnUser(context, User);
                     }
