@@ -5,6 +5,9 @@ using System.Web;
 
 namespace Cus.WebApi.Test.api
 {
+    /// <summary>
+    /// test 的摘要说明
+    /// </summary>
     [Documentation("~/App_Data/Cus.WebApi.Test.XML")]
     [ApiCode(500, "通用错误")]
     public class test : ApiController

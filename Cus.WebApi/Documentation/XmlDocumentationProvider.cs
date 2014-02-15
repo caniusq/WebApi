@@ -31,9 +31,12 @@ namespace Cus.WebApi
             _documentNavigator = xpath.CreateNavigator();
         }
 
-        public void SetDocumentation(ApiDescriptor apiDescriptor)
+        public void SetDocumentation(ApiDescriptor apiDescriptor, bool classDocOnly = false)
         {
             apiDescriptor.Documentation = GetApiDocumentation(apiDescriptor);
+
+            if (classDocOnly) return;
+
             foreach (var methodDescriptor in apiDescriptor.Methods)
             {
                 methodDescriptor.Documentation = GetMethodDocumentation(methodDescriptor);

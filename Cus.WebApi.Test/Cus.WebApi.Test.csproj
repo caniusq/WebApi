@@ -74,13 +74,13 @@
     </Content>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="api\test.cs" />
+    <Compile Include="controllers\test.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Entity.cs" />
-    <Compile Include="api\test2.cs" />
+    <Compile Include="controllers\test2.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Cus.WebApi\Cus.WebApi.csproj">
@@ -102,7 +102,7 @@
     <VisualStudio>
       <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
         <WebProjectProperties>
-          <UseIIS>False</UseIIS>
+          <UseIIS>True</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>17154</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>

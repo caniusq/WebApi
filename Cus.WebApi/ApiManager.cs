@@ -295,6 +295,24 @@ namespace Cus.WebApi
                 if (resp.User == null) resp.User = new Identity();
         }
 
+        public void FetchClassDocumentation()
+        {
+            if (_apiDescriptor.Documentation != null) return;
+            var attrs = _apiDescriptor.ApiType.GetCustomAttributes(typeof(DocumentationAttribute), true);
+            if (attrs.Length == 0) return;
+            foreach (DocumentationAttribute attr in attrs)
+            {
+                string path = attr.Path;
+                if (!File.Exists(path))
+                {
+                    path = HttpContext.Current.Server.MapPath(path);
+                    if (!File.Exists(path)) throw new FileNotFoundException("没有找到说明文档");
+                }
+                var provider = new XmlDocumentationProvider(path);
+                provider.SetDocumentation(_apiDescriptor, true);
+            }
+        }
+
         public bool EnableDocumentation()
         {
             if (_documentaionEnabled) return true;

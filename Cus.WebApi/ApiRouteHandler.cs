@@ -36,7 +36,7 @@ namespace Cus.WebApi
         {
             Type controllerType;
             if (_controllerDic.TryGetValue(controllerName, out controllerType)) return controllerType;
-            lock (_syncRoot)
+            lock (_controllerDic)
             {
                 if (_controllerDic.TryGetValue(controllerName, out controllerType)) return controllerType;
 
@@ -59,6 +59,27 @@ namespace Cus.WebApi
             }
         }
 
+        private static List<Type> _controllerTypes;
+        private static List<Type> FindAllControllerType(HttpApplication app)
+        {
+            if (_controllerTypes != null) return _controllerTypes;
+            lock (_syncRoot)
+            {
+                if (_controllerTypes != null) return _controllerTypes;
+
+                var asm = GetGlobalAssembly(app);
+                List<Type> types = new List<Type>();
+
+                foreach (Type type in asm.GetTypes())
+                {
+                    if (!type.IsSubclassOf(typeof(ApiController))) continue;
+                    types.Add(type);
+                }
+                _controllerTypes = types;
+                return _controllerTypes;
+            }
+        }
+
         public System.Web.IHttpHandler GetHttpHandler(RequestContext requestContext)
         {
             object controller = requestContext.RouteData.Values["controller"];
@@ -66,12 +87,13 @@ namespace Cus.WebApi
 
             if (controller == UrlParameter.Optional)
             {
-                throw new NotImplementedException();
+                var types = FindAllControllerType(requestContext.HttpContext.ApplicationInstance);
+                return new ApiListHandler(types);
             }
 
-            if ("special.res".Equals(controller))
+            if ("special-res".Equals(controller))
             {
-                requestContext.HttpContext.Items["res"] = (string)action;
+                requestContext.HttpContext.Items["res"] = requestContext.HttpContext.Request.QueryString["res"];
                 return new ResHandler();
             }
 

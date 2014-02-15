@@ -19,11 +19,14 @@ namespace Cus.WebApi
         /// <param name="urlBase">路由基路径</param>
         public static void MapWebApiRoute(this RouteCollection routes, string name, string urlBase = "api")
         {
+            routes.Add(new Route("{resource}.axd/{*pathInfo}", new StopRoutingHandler()));
+
             var dic = new RouteValueDictionary(new
             {
                 controller = UrlParameter.Optional,
                 action = UrlParameter.Optional
             });
+
             routes.Add(name, new Route(urlBase + "/{controller}/{action}", dic, new ApiRouteHandler()));
         }
     }

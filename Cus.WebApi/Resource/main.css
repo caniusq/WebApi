@@ -1,0 +1,24 @@
+﻿body
+{
+    overflow: hidden;
+    margin: 0px;
+    padding: 10px;
+    height: 100%;
+    font-size: 25px;
+    font-family: "Consolas";
+}
+
+ul
+{
+    list-style-type: circle;
+}
+
+li
+{
+    margin-top: 20px;
+}
+
+.doc
+{
+    color: #007acc;
+}

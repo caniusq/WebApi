@@ -156,7 +156,7 @@
             返回码特性
             </summary>
             <param name="code">返回码</param>
-            <param name="code">说明</param>
+            <param name="description">说明</param>
         </member>
         <member name="P:Cus.WebApi.ApiCodeAttribute.Code">
             <summary>

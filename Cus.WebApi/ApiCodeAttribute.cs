@@ -17,7 +17,7 @@ namespace Cus.WebApi
         /// 返回码特性
         /// </summary>
         /// <param name="code">返回码</param>
-        /// <param name="code">说明</param>
+        /// <param name="description">说明</param>
         public ApiCodeAttribute(int code, string description)
         {
             _code = code;

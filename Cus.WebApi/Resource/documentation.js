@@ -82,7 +82,7 @@
 
 function refreshUser() {
     $.ajax({
-        url: window.location.pathname + "/special.user",
+        url: window.location.pathname + "/special-user",
         type: "POST",
         success: function (data) {
             var user = data.User;

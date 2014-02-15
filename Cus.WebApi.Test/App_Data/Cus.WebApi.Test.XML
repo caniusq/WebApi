@@ -4,6 +4,11 @@
         <name>Cus.WebApi.Test</name>
     </assembly>
     <members>
+        <member name="T:Cus.WebApi.Test.api.test">
+            <summary>
+            test 的摘要说明
+            </summary>
+        </member>
         <member name="M:Cus.WebApi.Test.api.test.SignIn(System.String,System.Collections.Generic.Dictionary{System.String,System.String},System.Int32,System.Nullable{System.DateTime})">
             <summary>
             method1 的摘要说明

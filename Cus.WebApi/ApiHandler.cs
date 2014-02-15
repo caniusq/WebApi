@@ -28,12 +28,11 @@ namespace Cus.WebApi
             if (_api == null)
             {
                 context.Response.StatusCode = 404;
-                context.Response.Write("404 file not found.");
                 return;
             }
 
             string action = (string)context.Items["action"];
-            bool queryUser = "special.user".Equals(action);
+            bool queryUser = "special-user".Equals(action);
 
             context.Response.ContentEncoding = _encoding;
             context.Response.ContentType = "application/json";

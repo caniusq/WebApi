@@ -50,6 +50,7 @@
   <ItemGroup>
     <Compile Include="ApiAuthAttribute.cs" />
     <Compile Include="ApiHandler.cs" />
+    <Compile Include="ApiListHandler.cs" />
     <Compile Include="ApiRouteHandler.cs" />
     <Compile Include="Configuration\ApiConfigurationSection.cs" />
     <Compile Include="Configuration\AutheticationType.cs" />
@@ -124,12 +125,15 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Resource\lock.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resource\main.css" />
+  </ItemGroup>
+  <ItemGroup>
     <EmbeddedResource Include="Resource\documentation.min.css">
       <DependentUpon>documentation.css</DependentUpon>
     </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Resource\lock.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

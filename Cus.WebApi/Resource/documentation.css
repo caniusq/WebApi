@@ -52,7 +52,7 @@
         margin: 5px;
         width: 32px;
         height: 32px;
-        background-image: url(list.png);
+        background-image: url(special-res?res=list.png);
         background-repeat: no-repeat;
         -moz-background-size: 100%;
         -o-background-size: 100%;
@@ -85,7 +85,7 @@
             margin:5px;
             width: 32px;
             height: 32px;
-            background-image: url(user.png);
+            background-image: url(special-res?res=user.png);
             background-repeat: no-repeat;
             -moz-background-size: 100%;
             -o-background-size: 100%;
@@ -170,7 +170,7 @@
         margin-right: 4px;
         width: 20px;
         height: 20px;
-        background-image: url(lock.png);
+        background-image: url(special-res?res=lock.png);
         -moz-background-size: 100%;
         -o-background-size: 100%;
         background-size: 100%;
