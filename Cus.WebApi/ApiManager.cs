@@ -288,8 +288,7 @@ namespace Cus.WebApi
 
             if (!prepareResult.ResponseVoid)
             {
-                var setMethod = method.ResponseParam.Type.GetProperty("result").GetSetMethod();
-                setMethod.Invoke(resp, new object[] { ret });
+                method.ResponseSetResultMethod.Invoke(resp, new object[] { ret });
             }
 
             if (api.TempUser != null) resp.User = api.TempUser;

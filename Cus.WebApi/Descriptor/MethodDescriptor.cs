@@ -16,6 +16,7 @@ namespace Cus.WebApi
         private readonly ParameterInfo _responseParameterInfo;
         private readonly IEnumerable<ApiCodeAttribute> _responseCodes;
         private readonly bool _needAuth;
+        private MethodInfo _responseSetResultMethod;
 
         public MethodDescriptor(MethodInfo info, List<ApiCodeAttribute> attrs,bool needAuth)
             : base(info.Name)
@@ -79,6 +80,19 @@ namespace Cus.WebApi
             get
             {
                 return _responseParam;
+            }
+        }
+
+        [JsonIgnore]
+        public MethodInfo ResponseSetResultMethod
+        {
+            get
+            {
+                if (_responseSetResultMethod == null)
+                {
+                    _responseSetResultMethod = _responseParam.Type.GetProperty("result").GetSetMethod();
+                }
+                return _responseSetResultMethod;
             }
         }
 
