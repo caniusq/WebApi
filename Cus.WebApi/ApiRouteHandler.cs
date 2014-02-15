@@ -74,8 +74,15 @@ namespace Cus.WebApi
                 requestContext.HttpContext.Items["res"] = (string)action;
                 return new ResHandler();
             }
-            
-            if (action != UrlParameter.Optional)
+
+            if (action == UrlParameter.Optional)
+            {
+                if (requestContext.HttpContext.Request.AppRelativeCurrentExecutionFilePath.EndsWith("/"))
+                {
+                    return new ApiHandler(null);
+                }
+            }
+            else
             {
                 requestContext.HttpContext.Items["action"] = (string)action;
             }
