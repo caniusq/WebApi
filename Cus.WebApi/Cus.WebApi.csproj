@@ -87,7 +87,7 @@
     <EmbeddedResource Include="Resource\documentation.html" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Resource\documentation.js" />
+    <None Include="Resource\documentation.js" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Resource\jquery-1.10.2.min.js" />
