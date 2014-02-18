@@ -58,12 +58,10 @@ namespace Cus.WebApi
 
         internal Identity TempUser { get; set; }
 
-        internal Identity InternalUser { get { return User; } }
-
         /// <summary>
         /// 获取或设置用户身份信息
         /// </summary>
-        protected Identity User
+        internal protected Identity User
         {
             get
             {

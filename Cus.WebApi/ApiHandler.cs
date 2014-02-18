@@ -53,7 +53,7 @@ namespace Cus.WebApi
                 {
                     if (queryUser)
                     {
-                        apiManager.InvokeReturnUser(context, _api.InternalUser);
+                        apiManager.InvokeReturnUser(context, _api.User);
                     }
                     else
                     {
