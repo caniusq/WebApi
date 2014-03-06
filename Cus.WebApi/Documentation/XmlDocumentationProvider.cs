@@ -33,16 +33,24 @@ namespace Cus.WebApi
 
         public void SetDocumentation(ApiDescriptor apiDescriptor)
         {
-            apiDescriptor.Documentation = GetApiDocumentation(apiDescriptor);
+            if (apiDescriptor.Documentation == null)
+                apiDescriptor.Documentation = GetApiDocumentation(apiDescriptor);
+
             foreach (var methodDescriptor in apiDescriptor.Methods)
             {
-                methodDescriptor.Documentation = GetMethodDocumentation(methodDescriptor);
+                if (methodDescriptor.Documentation == null)
+                    methodDescriptor.Documentation = GetMethodDocumentation(methodDescriptor);
+
                 foreach (var paramDescriptor in methodDescriptor.Params)
                 {
-                    paramDescriptor.Documentation = GetParamDocumentation(methodDescriptor, paramDescriptor);
+                    if (paramDescriptor.Documentation == null)
+                        paramDescriptor.Documentation = GetParamDocumentation(methodDescriptor, paramDescriptor);
+
                     ScanParamDocumentation(paramDescriptor);
                 }
-                methodDescriptor.ResponseParam.Documentation = GetResponseDocumentation(methodDescriptor);
+                if (methodDescriptor.ResponseParam.Documentation == null)
+                    methodDescriptor.ResponseParam.Documentation = GetResponseDocumentation(methodDescriptor);
+
                 ScanParamDocumentation(methodDescriptor.ResponseParam);
             }
         }
@@ -94,10 +102,9 @@ namespace Cus.WebApi
         private void ScanPropertyDocumentation(PropertyDescriptor propertyDescriptor)
         {
             XPathNavigator propertyNode = GetPropertyNode(propertyDescriptor);
-            string documentation = GetTagValue(propertyNode, "summary");
 
-            if (propertyDescriptor.Documentation == null && documentation != null)
-                propertyDescriptor.Documentation = documentation;
+            if (propertyDescriptor.Documentation == null)
+                propertyDescriptor.Documentation = GetTagValue(propertyNode, "summary");
 
             if (propertyDescriptor.Def.IsLeaf) return;
             if (propertyDescriptor.Def.IsArray && propertyDescriptor.SubType != null && propertyDescriptor.SubType.Def.IsObject)
