@@ -36,6 +36,14 @@ public class test : ApiController
 }
 ```
 
+in web.config
+```xml
+<system.webServer>
+<modules runAllManagedModulesForAllRequests="true">
+</modules>
+</system.webServer>
+```
+
 then open url:
 
 http://www.yourwebsite.com/api
