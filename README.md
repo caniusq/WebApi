@@ -36,7 +36,7 @@ public class test : ApiController
 }
 ```
 
-in web.config
+in web.config:
 ```xml
 <system.webServer>
 <modules runAllManagedModulesForAllRequests="true">
